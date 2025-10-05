@@ -122,9 +122,38 @@ A=\begin{bmatrix}
 determine all the values of $\alpha \in \Re$ such that the system
 contains as many modes as possible.
 
+Since the matrix is 3x3, the system has a maximum number of three modes. The number of modes will be given by subtracting the geometric multiplicity from the algebraic multiplicity.
+
+The eigenvalue of this system is not influenced by the alpha and it is lambda = 1. If we calculate A - lambda*I we will get the matrix:
+A - lambda*I = [0, alpha, 2; 0, -1, -1; 0, 1, 1]
+Algebraic multiplicity of the eigenvalue is 3.
+If we were to choose alpha = 2 then the geometric multiplicity would be 2. That means, to have the highest amount of modes (2 modes), alpha cannot be 2.
+
+It is possible to find an eigenvectors and two generalized eigenvectors, so the J matrix will look like:
+J = [-1, 1, 0; 0, -1, 1; 0, 0, -1]
+
 \item A certain man put a pair of rabbits in a place surrounded on all sides by a wall.
 What will be the number of pairs of rabbits in a month $k$ if it is supposed that every month each pair begs a new pair which from the second month
 on becomes productive? Suppose that the rabbits do not die. Write corresponding state-space equations and solve them in explicit form (i. e. as a scalar function of $k$).
+
+I would like to model this system as a descrete system where the state variable x is only a scalar - the number of rabbits.
+
+The initial condition for the number of rabbits will be 1 pair or it can be 2 rabbits.
+
+The matrix A is in this case also only a scalar (because the state is a scalar) and it will be A = 2 because the number of rabbits multiplies every month.
+
+The input u equals to zero because no rabbits are inputted into the system every month. Thus the matrix (also a scalar in this case) B can be any value - we can keep it at B = 1.
+
+Finally the output y is the number of rabbits, which means that the matrix C is 1. The matrix D can also be any number since there are no inputs u, but we will keep it at 1, because the number of rabbits added directly adds to the total number of rabbits.
+
+That gives us these equations which describe the system:
+x(k+1) = A*x(k)
+y(k) = 1*x(k)
+
+These equations can be rewritten into this form:
+x(k) = A^(k-k0)*x0
+
+Where x0 is the initial number of rabbits and k0 is the starting month.
 
 \end{enumerate}
 
