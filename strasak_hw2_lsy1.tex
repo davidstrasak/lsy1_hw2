@@ -1,0 +1,77 @@
+\documentclass[10pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+\setlength{\voffset}{-0.65in}   %upper border 
+\setlength{\hoffset}{-0.65in}   %left border
+
+\title{[B3M35LSY] Assignment}
+\author{David Strašák}
+\date{05.10.2025} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+%\maketitle
+
+{\bf Exercises for lecture 2}
+
+% ========= 2nd WEEK 25/26 ================================
+\begin{enumerate}
+\item For the system $\dot{x}(t) = Ax(t)$ with
+\begin{eqnarray*}
+A=\begin{bmatrix}
+0 & 1\\
+1 & 0 
+\end{bmatrix}
+\end{eqnarray*}
+determine all initial conditions $x(0)$ such that any of the elements of $x(t) \rightarrow \infty$ as $t \rightarrow \infty$.
+
+\item For the system $x(k+1) = Ax(k) + Bu(k)$ with 
+\begin{eqnarray*}
+A=\begin{bmatrix}
+2 & 0\\
+0 & -1
+\end{bmatrix},\,
+B=\begin{bmatrix}
+1\\
+2
+\end{bmatrix}
+\end{eqnarray*}
+determine all initial conditions $x(0)$ such that there exists an input sequence $u(k)$ so that the state remains  at $x(0)$, i. e. $x(k) = x(0)$ for all $k \geq 0$.
+
+\item Consider continuous-time system $\dot{x}(t) = Ax(t) + Bu(t),\,y(t) = Cx(t)$ with 
+\begin{eqnarray*}
+A=\begin{bmatrix}
+-1 & 1\\
+-1 & 0
+\end{bmatrix},\,
+B=\begin{bmatrix}
+0\\
+1
+\end{bmatrix},\,
+C = [1 & 0].
+\end{eqnarray*}
+Choose $\alpha$ and $x(0)$ such that $u(t)={\rm e}^{\alpha t}$ produces $y(t) = {\rm e}^{\alpha t}$, i. e. the system behaves as a unity gain.
+
+\item For a continuous-time system described by
+$\dot{x}(t) = Ax(t)$ with
+\begin{eqnarray*}
+A=\begin{bmatrix}
+-1 & \alpha & 2\\
+0 & -2 & -1\\
+0 & 1 & 0
+\end{bmatrix}
+\end{eqnarray*}
+determine all the values of $\alpha \in \Re$ such that the system
+contains as many modes as possible.
+
+\item A certain man put a pair of rabbits in a place surrounded on all sides by a wall.
+What will be the number of pairs of rabbits in a month $k$ if it is supposed that every month each pair begs a new pair which from the second month
+on becomes productive? Suppose that the rabbits do not die. Write corresponding state-space equations and solve them in explicit form (i. e. as a scalar function of $k$).
+
+\end{enumerate}
+
+\end{document}
