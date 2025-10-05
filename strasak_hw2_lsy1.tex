@@ -29,6 +29,28 @@ A=\begin{bmatrix}
 \end{eqnarray*}
 determine all initial conditions $x(0)$ such that any of the elements of $x(t) \rightarrow \infty$ as $t \rightarrow \infty$.
 
+In other words we want to see for which initial condition the value of x diverges.
+
+Eigenvalues for this system are 1 and -1.
+Eigenvector for the first eigenvalue is [1;1]
+Eigenvector for the second eigenvalue is [1;-1]
+That gives us the matrix J = [1,0;0,-1] and the matrix P = [1,1;1,-1]
+We can then calculate the value of x through this formula:
+x = P*e^(Jt)*p^(-1)*x0
+That is:
+[x1;x2] = [1,1;1,-1]*[e^t,0;0,e^(-t)]*[1/2,1/2;1/2,-1/2]*[c1;c2]
+Modified it is:
+[x1;x2] = [e^t,e^(-t);e^t,-e^(-t)]*[k1;k2]
+where k1 = 1/2*(c1+c2) and k2=1/2*(c1-c2)
+c1 and c2 are defined here: x0 = [c1;c2]
+e^(-t) always converges into 0, so we will focus on the rows which are e^t*k1.
+
+e^t*k1 will always converge if k1 is not zero. So the final solution is:
+
+1/2*(c1+c2) is not 0.
+
+This system will diverge whenever c1+c2 is not 0.
+
 \item For the system $x(k+1) = Ax(k) + Bu(k)$ with 
 \begin{eqnarray*}
 A=\begin{bmatrix}
@@ -41,6 +63,18 @@ B=\begin{bmatrix}
 \end{bmatrix}
 \end{eqnarray*}
 determine all initial conditions $x(0)$ such that there exists an input sequence $u(k)$ so that the state remains  at $x(0)$, i. e. $x(k) = x(0)$ for all $k \geq 0$.
+
+We can write out the equation in matrix form:
+[x1(k+1);x2(k+1)] = [2,0;0,-1]*[x1(k);x2(k)] + [1;2]*u(k)
+Since x(k+1) = x(k) = x(0) we can write this out into this linear system of equations:
+-x1 = u
+x2 = u
+That gives us the relation between x1 and x2:
+x2 = -x1
+
+In order for the input u to exist, the x1 and x2 points need to be lying on this line x2 = -x1.
+
+So the input is x0 = [k, -k] where k can be any real number.
 
 \item Consider continuous-time system $\dot{x}(t) = Ax(t) + Bu(t),\,y(t) = Cx(t)$ with 
 \begin{eqnarray*}
@@ -55,6 +89,26 @@ B=\begin{bmatrix}
 C = [1 & 0].
 \end{eqnarray*}
 Choose $\alpha$ and $x(0)$ such that $u(t)={\rm e}^{\alpha t}$ produces $y(t) = {\rm e}^{\alpha t}$, i. e. the system behaves as a unity gain.
+
+We can write this system of equations into this form:
+[x1'; x2'] = [-1,1;-1,0]*[x1;x2] + [0;e^(alpha*t)]
+And because we got this from the line with the matrix C: x1 = e^(alpha*t), we immediately have the function of x1.
+We can make a derivative of this function and put substitute it into the first line of the equation with matrixes A and B.
+x1' = alpha*e^(alpha*t)
+alpha*e^(alpha*t) = -e^(alpha*t) + x2(t)
+From this we can find the definition for x2(t)
+x2(t) = alpha*e^(alpha*t)+e^(alpha*t)
+Now that we have the definitions of x1 and x2 we can almost find the initial conditions of this equation:
+x(0) = [1; alpha + 1]
+We can once again make a derivative of x2 and put it inside the second equation with the matrixes A and B.
+x2' = alpha^2*e^(alpha*t) + alpha*e^(alpha*t)
+alpha^2*e^(alpha*t) + alpha*e^(alpha*t) = -e^(alpha*t) + e^(alpha*t) = 0
+Now we can find the value of alpha:
+alpha*(alpha + 1)*e^(alpha*t) = 0
+Alpha is either 0 or -1.
+We will choose alpha to be 0. Now we can find the initial conditions of the equation:
+x0 = [1;0 + 1]
+For alpha = 0.
 
 \item For a continuous-time system described by
 $\dot{x}(t) = Ax(t)$ with
