@@ -1,160 +1,209 @@
-\documentclass[10pt]{article} % use larger type; default would be 10pt
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
 
-\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+% Standard mathematical packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+% The bmatrix environment used for matrices is provided by amsmath.
 
-\setlength{\voffset}{-0.65in}   %upper border 
-\setlength{\hoffset}{-0.65in}   %left border
+\setlength{\voffset}{-0.65in}   % Upper border
+\setlength{\hoffset}{-0.65in}   % Left border
 
 \title{[B3M35LSY] Assignment}
 \author{David Strašák}
-\date{05.10.2025} % Activate to display a given date or no date (if empty),
-         % otherwise the current date is printed
-
-\usepackage{amsmath}
-\usepackage{amssymb}
+\date{05.10.2025}
 
 \begin{document}
-%\maketitle
-
-{\bf Exercises for lecture 2}
-
-% ========= 2nd WEEK 25/26 ================================
-\begin{enumerate}
-\item For the system $\dot{x}(t) = Ax(t)$ with
-\begin{eqnarray*}
-A=\begin{bmatrix}
-0 & 1\\
-1 & 0 
-\end{bmatrix}
-\end{eqnarray*}
-determine all initial conditions $x(0)$ such that any of the elements of $x(t) \rightarrow \infty$ as $t \rightarrow \infty$.
-
-In other words we want to see for which initial condition the value of x diverges.
-
-Eigenvalues for this system are 1 and -1.
-Eigenvector for the first eigenvalue is [1;1]
-Eigenvector for the second eigenvalue is [1;-1]
-That gives us the matrix J = [1,0;0,-1] and the matrix P = [1,1;1,-1]
-We can then calculate the value of x through this formula:
-x = P*e^(Jt)*p^(-1)*x0
-That is:
-[x1;x2] = [1,1;1,-1]*[e^t,0;0,e^(-t)]*[1/2,1/2;1/2,-1/2]*[c1;c2]
-Modified it is:
-[x1;x2] = [e^t,e^(-t);e^t,-e^(-t)]*[k1;k2]
-where k1 = 1/2*(c1+c2) and k2=1/2*(c1-c2)
-c1 and c2 are defined here: x0 = [c1;c2]
-e^(-t) always converges into 0, so we will focus on the rows which are e^t*k1.
-
-e^t*k1 will always converge if k1 is not zero. So the final solution is:
-
-1/2*(c1+c2) is not 0.
-
-This system will diverge whenever c1+c2 is not 0.
-
-\item For the system $x(k+1) = Ax(k) + Bu(k)$ with 
-\begin{eqnarray*}
-A=\begin{bmatrix}
-2 & 0\\
-0 & -1
-\end{bmatrix},\,
-B=\begin{bmatrix}
-1\\
-2
-\end{bmatrix}
-\end{eqnarray*}
-determine all initial conditions $x(0)$ such that there exists an input sequence $u(k)$ so that the state remains  at $x(0)$, i. e. $x(k) = x(0)$ for all $k \geq 0$.
-
-We can write out the equation in matrix form:
-[x1(k+1);x2(k+1)] = [2,0;0,-1]*[x1(k);x2(k)] + [1;2]*u(k)
-Since x(k+1) = x(k) = x(0) we can write this out into this linear system of equations:
--x1 = u
-x2 = u
-That gives us the relation between x1 and x2:
-x2 = -x1
-
-In order for the input u to exist, the x1 and x2 points need to be lying on this line x2 = -x1.
-
-So the input is x0 = [k, -k] where k can be any real number.
-
-\item Consider continuous-time system $\dot{x}(t) = Ax(t) + Bu(t),\,y(t) = Cx(t)$ with 
-\begin{eqnarray*}
-A=\begin{bmatrix}
--1 & 1\\
--1 & 0
-\end{bmatrix},\,
-B=\begin{bmatrix}
-0\\
-1
-\end{bmatrix},\,
-C = [1 & 0].
-\end{eqnarray*}
-Choose $\alpha$ and $x(0)$ such that $u(t)={\rm e}^{\alpha t}$ produces $y(t) = {\rm e}^{\alpha t}$, i. e. the system behaves as a unity gain.
-
-We can write this system of equations into this form:
-[x1'; x2'] = [-1,1;-1,0]*[x1;x2] + [0;e^(alpha*t)]
-And because we got this from the line with the matrix C: x1 = e^(alpha*t), we immediately have the function of x1.
-We can make a derivative of this function and put substitute it into the first line of the equation with matrixes A and B.
-x1' = alpha*e^(alpha*t)
-alpha*e^(alpha*t) = -e^(alpha*t) + x2(t)
-From this we can find the definition for x2(t)
-x2(t) = alpha*e^(alpha*t)+e^(alpha*t)
-Now that we have the definitions of x1 and x2 we can almost find the initial conditions of this equation:
-x(0) = [1; alpha + 1]
-We can once again make a derivative of x2 and put it inside the second equation with the matrixes A and B.
-x2' = alpha^2*e^(alpha*t) + alpha*e^(alpha*t)
-alpha^2*e^(alpha*t) + alpha*e^(alpha*t) = -e^(alpha*t) + e^(alpha*t) = 0
-Now we can find the value of alpha:
-alpha*(alpha + 1)*e^(alpha*t) = 0
-Alpha is either 0 or -1.
-We will choose alpha to be 0. Now we can find the initial conditions of the equation:
-x0 = [1;0 + 1]
-For alpha = 0.
-
-\item For a continuous-time system described by
-$\dot{x}(t) = Ax(t)$ with
-\begin{eqnarray*}
-A=\begin{bmatrix}
--1 & \alpha & 2\\
-0 & -2 & -1\\
-0 & 1 & 0
-\end{bmatrix}
-\end{eqnarray*}
-determine all the values of $\alpha \in \Re$ such that the system
-contains as many modes as possible.
-
-Since the matrix is 3x3, the system has a maximum number of three modes. The number of modes will be given by subtracting the geometric multiplicity from the algebraic multiplicity.
-
-The eigenvalue of this system is not influenced by the alpha and it is lambda = 1. If we calculate A - lambda*I we will get the matrix:
-A - lambda*I = [0, alpha, 2; 0, -1, -1; 0, 1, 1]
-Algebraic multiplicity of the eigenvalue is 3.
-If we were to choose alpha = 2 then the geometric multiplicity would be 2. That means, to have the highest amount of modes (2 modes), alpha cannot be 2.
-
-It is possible to find an eigenvectors and two generalized eigenvectors, so the J matrix will look like:
-J = [-1, 1, 0; 0, -1, 1; 0, 0, -1]
-
-\item A certain man put a pair of rabbits in a place surrounded on all sides by a wall.
-What will be the number of pairs of rabbits in a month $k$ if it is supposed that every month each pair begs a new pair which from the second month
-on becomes productive? Suppose that the rabbits do not die. Write corresponding state-space equations and solve them in explicit form (i. e. as a scalar function of $k$).
-
-I would like to model this system as a descrete system where the state variable x is only a scalar - the number of rabbits.
-
-The initial condition for the number of rabbits will be 1 pair or it can be 2 rabbits.
-
-The matrix A is in this case also only a scalar (because the state is a scalar) and it will be A = 2 because the number of rabbits multiplies every month.
-
-The input u equals to zero because no rabbits are inputted into the system every month. Thus the matrix (also a scalar in this case) B can be any value - we can keep it at B = 1.
-
-Finally the output y is the number of rabbits, which means that the matrix C is 1. The matrix D can also be any number since there are no inputs u, but we will keep it at 1, because the number of rabbits added directly adds to the total number of rabbits.
-
-That gives us these equations which describe the system:
-x(k+1) = A*x(k)
-y(k) = 1*x(k)
-
-These equations can be rewritten into this form:
-x(k) = A^(k-k0)*x0
-
-Where x0 is the initial number of rabbits and k0 is the starting month.
-
-\end{enumerate}
-
+	\maketitle
+	
+	{\bf Exercises for lecture 2}
+	
+	\begin{enumerate}
+		
+		\item \textbf{For the system $\dot{x}(t) = Ax(t)$ with
+		\begin{eqnarray*}
+			A=\begin{bmatrix}
+				0 & 1\\
+				1 & 0 
+			\end{bmatrix}
+		\end{eqnarray*}
+		determine all initial conditions $x(0)$ such that any of the elements of $x(t) \rightarrow \infty$ as $t \rightarrow \infty$.}
+		
+		In other words, we want to see for which initial condition the value of $\mathbf{x}(t)$ diverges.
+		
+		The eigenvalues for this system are $\lambda_1 = 1$ and $\lambda_2 = -1$.
+		The corresponding eigenvectors are $\mathbf{v}_1 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$ and $\mathbf{v}_2 = \begin{bmatrix} 1 \\ -1 \end{bmatrix}$.
+		This gives us the Jordan form matrix $J = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix}$ and the transformation matrix $P = \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}$.
+		
+		We can then calculate the value of $\mathbf{x}(t)$ through the formula:
+		$$
+		\mathbf{x}(t) = P e^{Jt} P^{-1} \mathbf{x}(0)
+		$$
+		Assuming the initial condition $\mathbf{x}(0) = \begin{bmatrix} c_1 \\ c_2 \end{bmatrix}$, the full expression is:
+		$$
+		\begin{bmatrix} x_1(t) \\ x_2(t) \end{bmatrix} = \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} \begin{bmatrix} e^t & 0 \\ 0 & e^{-t} \end{bmatrix} \begin{bmatrix} 1/2 & 1/2 \\ 1/2 & -1/2 \end{bmatrix} \begin{bmatrix} c_1 \\ c_2 \end{bmatrix}
+		$$
+		
+		Modified it is:
+		$$
+		\begin{bmatrix} x_1(t) \\ x_2(t) \end{bmatrix} = \begin{bmatrix} e^t & e^{-t} \\ e^t & -e^{-t} \end{bmatrix} \begin{bmatrix} k_1 \\ k_2 \end{bmatrix}
+		$$
+		where $k_1 = \frac{1}{2}(c_1+c_2)$ and $k_2=\frac{1}{2}(c_1-c_2)$. The values $c_1$ and $c_2$ are defined by $\mathbf{x}(0) = \begin{bmatrix} c_1 \\ c_2 \end{bmatrix}$.
+		
+		The components of $\mathbf{x}(t)$ are:
+		\begin{align*}
+			x_1(t) &= k_1 e^t + k_2 e^{-t} \\
+			x_2(t) &= k_1 e^t - k_2 e^{-t}
+		\end{align*}
+		
+		Since $e^{-t} \rightarrow 0$ as $t \rightarrow \infty$, the divergence is determined by the term $e^t$. 
+		
+		The term $k_1 e^t$ will diverge to $\pm\infty$ if $k_1$ is not zero. 
+		
+		So the final solution is:
+		$$ \frac{1}{2}(c_1+c_2) \neq 0 $$
+		This system will diverge whenever $c_1+c_2$ is not $0$.
+		
+		\item \textbf{For the system $x(k+1) = Ax(k) + Bu(k)$ with 
+			\begin{eqnarray*}
+				A=\begin{bmatrix}
+					2 & 0\\
+					0 & -1
+				\end{bmatrix},\,
+				B=\begin{bmatrix}
+					1\\
+					2
+				\end{bmatrix}
+			\end{eqnarray*}
+			determine all initial conditions $x(0)$ such that there exists an input sequence $u(k)$ so that the state remains  at $x(0)$, i. e. $x(k) = x(0)$ for all $k \geq 0$.}
+		
+		If $\mathbf{x}(k+1) = \mathbf{x}(k) = \mathbf{x}(0)$, the equation becomes $\mathbf{x}(0) = A\mathbf{x}(0) + B u(0)$. Let $\mathbf{x}(0) = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}$ and $u(0)=u$.
+		We can write out the equation in matrix form:
+		$$
+		\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 2 & 0 \\ 0 & -1 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} + \begin{bmatrix} 1 \\ 2 \end{bmatrix} u
+		$$
+		This gives us the following linear system of equations:
+		\begin{align*}
+			x_1 &= 2x_1 + u \implies -x_1 = u \\
+			x_2 &= -x_2 + 2u \implies 2x_2 = 2u \implies x_2 = u
+		\end{align*}
+		That gives us the relation between $x_1$ and $x_2$:
+		$$ x_2 = -x_1 $$
+		In order for the input $u$ to exist, the initial condition $\mathbf{x}(0)$ must satisfy this linear relationship.
+		
+		So the initial conditions are of the form $\mathbf{x}(0) = \begin{bmatrix} k \\ -k \end{bmatrix}$ where $k$ can be any real number ($k \in \mathbb{R}$).
+		
+		\item \textbf{Consider continuous-time system $\dot{x}(t) = Ax(t) + Bu(t),\,y(t) = Cx(t)$ with 
+			\begin{eqnarray*}
+				A=\begin{bmatrix}
+					-1 & 1\\
+					-1 & 0
+				\end{bmatrix},\,
+				B=\begin{bmatrix}
+					0\\
+					1
+				\end{bmatrix},\,
+				C = [1 & 0].
+			\end{eqnarray*}
+			Choose $\alpha$ and $x(0)$ such that $u(t)={\rm e}^{\alpha t}$ produces $y(t) = {\rm e}^{\alpha t}$, i. e. the system behaves as a unity gain.
+		}
+		
+		From the output equation $y(t) = C\mathbf{x}(t)$, and the desired output $y(t) = e^{\alpha t}$, we immediately have the function for $x_1(t)$:
+		$$ x_1(t) = e^{\alpha t} $$
+		We can take the derivative of this function and substitute it into the first line of the state equation ($\dot{x}_1 = -x_1 + x_2$):
+		$$ \dot{x}_1(t) = \alpha e^{\alpha t} $$
+		Substituting gives:
+		$$ \alpha e^{\alpha t} = -e^{\alpha t} + x_2(t) $$
+		From this we can find the definition for $x_2(t)$:
+		$$ x_2(t) = \alpha e^{\alpha t} + e^{\alpha t} = (\alpha + 1)e^{\alpha t} $$
+		Now that we have the definitions of $x_1(t)$ and $x_2(t)$, we can find the initial condition (though we cannot specify it just yet because we don't know $\alpha$):
+		$$ \mathbf{x}(0) = \begin{bmatrix} x_1(0) \\ x_2(0) \end{bmatrix} = \begin{bmatrix} 1 \\ \alpha + 1 \end{bmatrix} $$
+		We can once again make a derivative of $x_2(t)$ and put it inside the second state equation ($\dot{x}_2 = -x_1 + u(t)$):
+		$$ \dot{x}_2(t) = \frac{d}{dt} [(\alpha + 1)e^{\alpha t}] = \alpha(\alpha + 1)e^{\alpha t} $$
+		Substituting all functions into the second state equation:
+		$$
+		\alpha(\alpha + 1)e^{\alpha t} = -e^{\alpha t} + e^{\alpha t} = 0
+		$$
+		Since $e^{\alpha t} \neq 0$, we must have $\alpha(\alpha + 1) = 0$.
+		Now we can find the value of $\alpha$:
+		$$ \alpha(\alpha + 1) = 0 $$
+		Alpha is either $\alpha = 0$ or $\alpha = -1$.
+		
+		We will choose $\alpha = 0$. Now we can find the initial condition:
+		$$ \mathbf{x}(0) = \begin{bmatrix} 1 \\ 0 + 1 \end{bmatrix} = \begin{bmatrix} 1 \\ 1 \end{bmatrix} $$
+		
+		\item \textbf{For a continuous-time system described by
+			$\dot{x}(t) = Ax(t)$ with
+			\begin{eqnarray*}
+				A=\begin{bmatrix}
+					-1 & \alpha & 2\\
+					0 & -2 & -1\\
+					0 & 1 & 0
+				\end{bmatrix}
+			\end{eqnarray*}
+			determine all the values of $\alpha \in \Re$ such that the system
+			contains as many modes as possible.
+		}
+		
+		Since the matrix is $3 \times 3$, the system has a maximum number of three modes. The number of modes will be given by subtracting the geometric multiplicity from the algebraic multiplicity.
+		
+		The eigenvalue of this system is not influenced by the $\alpha$ and it is $\lambda = 1$. If we calculate $A - \lambda I$ we will get the matrix:
+		$$
+		A - \lambda I = \begin{bmatrix}
+			0 & \alpha & 2\\
+			0 & -1 & -1\\
+			0 & 1 & 1
+		\end{bmatrix}
+		$$
+		The algebraic multiplicity of the eigenvalue is $3$.
+		If we were to choose $\alpha = 2$ then the geometric multiplicity would be $2$. If we were to choose any other number than $2$, the geometric multiplicity would be 1.That means, to have the highest amount of modes ($2$ modes), $\alpha$ cannot be $2$.
+		
+		It is possible to find an eigenvectors and two generalized eigenvectors, so the $J$ matrix will look like:
+		$$
+		J = \begin{bmatrix}
+			-1 & 1 & 0\\
+			0 & -1 & 1\\
+			0 & 0 & -1
+		\end{bmatrix}
+		$$
+		
+		\item \textbf{A certain man put a pair of rabbits in a place surrounded on all sides by a wall.
+			What will be the number of pairs of rabbits in a month $k$ if it is supposed that every month each pair begs a new pair which from the second month
+			on becomes productive? Suppose that the rabbits do not die. Write corresponding state-space equations and solve them in explicit form (i. e. as a scalar function of $k$).
+		}
+		
+		We will model this as a system with two state variables. $x_1(k)$ is the number of productive pairs and $x_2(k)$ is the number of young pairs. The output $y(k)$ will be the total number of rabbits.
+		
+		The initial condition is $\mathbf{x}(0) = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ because there is one initial productive pair.
+		
+		The state update equations are:
+		\begin{align*}
+			x_1(k+1) &= x_1(k) + x_2(k) \\
+			x_2(k+1) &= x_1(k)
+		\end{align*}
+		The corresponding discrete-time state-space equation is:
+		$$
+		\mathbf{x}(k+1) = A\mathbf{x}(k)
+		$$
+		so the state matrix is:
+		$$
+		A=\begin{bmatrix}
+			1 & 1\\
+			1 & 0
+		\end{bmatrix}
+		$$
+		The input can be $\mathbf{u}(k)=0$, because we are not inputting any new rabbits into the system. Because of this the matrix B and D can be zero.
+		The output $y(k)$ is:
+		$$
+		y(k) = C\mathbf{x}(k)
+		$$
+		where $C = \begin{bmatrix} 1 & 1 \end{bmatrix}$.
+		
+		The explicit solution for the state at time $k$ is given by:
+		$$
+		\mathbf{x}(k) = A^k \mathbf{x}(0)
+		$$
+		
+	\end{enumerate}
+	
 \end{document}
